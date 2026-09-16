@@ -1,0 +1,27 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local server / dependency artifacts (in case tooling is added later)
+node_modules/
+.env
+.env.local
+
+# Build artifacts (not used by default, but ignored just in case)
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Large or unoptimized source image drafts you may keep locally
+assets/images/_drafts/
