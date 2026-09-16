@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Kim Antonette</title>
+<meta name="description" content="Start a conversation about participant engagement, clinical research support, or digital-health collaboration.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" data-reveal>
+  <div class="header-inner">
+    <a href="index.html" class="wordmark-link" aria-label="Kim Antonette — home">
+      <span class="wordmark">Kim Antonette</span>
+      <span class="wordmark-sub">Clinical Trial Participant Engagement Services</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="digital-health.html">Digital Health</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+      </ul>
+      <a class="btn btn-primary nav-cta" href="https://calendly.com/REPLACE-WITH-YOUR-LINK" target="_blank" rel="noopener noreferrer">Book an introduction</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero" data-reveal>
+    <p class="overline">Contact</p>
+    <h1>Start with<br>a conversation.</h1>
+    <p class="page-hero-sub">For participant-engagement projects, clinical research support, or digital-health collaboration.</p>
+  </section>
+
+  <section class="contact-section">
+    <div class="contact-inner">
+
+      <div class="contact-details" data-reveal>
+        <h2>Reach directly</h2>
+        <ul class="contact-list">
+          <li>
+            <span class="contact-label">Email</span>
+            <a href="mailto:hello@REPLACE-WITH-YOUR-DOMAIN.com">hello@REPLACE-WITH-YOUR-DOMAIN.com</a>
+          </li>
+          <li>
+            <span class="contact-label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/REPLACE-WITH-YOUR-LINKEDIN" target="_blank" rel="noopener noreferrer">linkedin.com/in/REPLACE-WITH-YOUR-LINKEDIN</a>
+          </li>
+        </ul>
+        <a class="btn btn-primary" href="https://calendly.com/REPLACE-WITH-YOUR-LINK" target="_blank" rel="noopener noreferrer">Book an introduction</a>
+      </div>
+
+      <div class="contact-form-wrap" data-reveal>
+        <h2>Send an enquiry</h2>
+        <!--
+          FORM SUBMISSION NOTE:
+          This is a static site with no backend, so this form does not
+          submit anywhere by default. To make it functional, choose one:
+
+          OPTION A — Formspree (recommended, no code):
+            1. Create a form at https://formspree.io
+            2. Set the form "action" below to your Formspree endpoint,
+               e.g. action="https://formspree.io/f/your-id"
+            3. Set method="POST"
+
+          OPTION B — Netlify Forms (if hosting on Netlify):
+            1. Add the attribute  data-netlify="true"  to the <form> tag
+            2. Add a hidden input: <input type="hidden" name="form-name" value="contact">
+            3. Netlify auto-detects and handles submissions; no endpoint needed.
+
+          OPTION C — Any other form backend (Getform, Basin, custom API):
+            Update the action/method accordingly.
+        -->
+        <form class="contact-form" action="#" method="POST">
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+          </div>
+          <div class="form-row">
+            <label for="organisation">Organisation</label>
+            <input type="text" id="organisation" name="organisation" autocomplete="organization">
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+          <div class="form-row">
+            <label for="project-type">Project type</label>
+            <select id="project-type" name="project-type">
+              <option value="participant-engagement">Participant engagement</option>
+              <option value="clinical-research-support">Clinical research support</option>
+              <option value="digital-health-advisory">Digital health advisory</option>
+              <option value="research-innovation-support">Research &amp; innovation support</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="message">Brief message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">Send enquiry</button>
+          <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="wordmark">Kim Antonette</span>
+      <p>Clinical Trial Participant Engagement Services</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="digital-health.html">Digital Health</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <p class="footer-note">&copy; <span id="year"></span> Kim Antonette. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="scripts/main.js"></script>
+</body>
+</html>
