@@ -268,7 +268,8 @@ a{ color: var(--text); text-decoration: none; }
   background: var(--bg-sand);
   aspect-ratio: 4 / 4.6;
 }
-.abstract-art{ width: 100%; height: 100%; object-fit: cover; }
+.hero-visual img,
+.abstract-art{ width: 100%; height: 100%; object-fit: cover; display: block; }
 
 @media (max-width: 900px){
   .hero-inner{ grid-template-columns: 1fr; }
