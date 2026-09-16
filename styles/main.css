@@ -5,13 +5,13 @@
    ============================================================== */
 
 :root{
-  --ivory: #F4F0E8;
-  --paper: #FBF8F2;
-  --sand: #DED3C0;
-  --taupe: #A89886;
-  --cocoa: #6B584A;
-  --espresso: #2E241D;
-  --terracotta: #A66543;
+  --ivory: #FAF7F2;
+  --paper: #FFFFFF;
+  --sand: #EFE7DC;
+  --taupe: #8C7F6E;
+  --cocoa: #4A4038;
+  --espresso: #26201B;
+  --terracotta: #C99B76;
 
   --bg: var(--ivory);
   --bg-paper: var(--paper);
@@ -19,7 +19,7 @@
   --text: var(--espresso);
   --text-muted: var(--cocoa);
   --accent: var(--terracotta);
-  --border: rgba(46,36,29,0.12);
+  --border: rgba(38,32,27,0.10);
 
   --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -39,7 +39,7 @@
     --bg-sand: #3A2E24;
     --text: #F1E9DD;
     --text-muted: #CBB9A4;
-    --accent: #C98356;
+    --accent: #D6A87C;
     --border: rgba(241,233,221,0.14);
   }
 }
@@ -156,7 +156,7 @@ a{ color: var(--text); text-decoration: none; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(244,240,232,0.9);
+  background: rgba(250,247,242,0.9);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
