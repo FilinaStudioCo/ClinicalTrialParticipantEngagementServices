@@ -208,7 +208,10 @@ a{ color: var(--text); text-decoration: none; }
   height: 44px;
   background: none;
   border: none;
+  padding: 0;
   cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .nav-toggle span{
   display: block;
