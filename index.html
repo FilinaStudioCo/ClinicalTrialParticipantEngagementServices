@@ -10,7 +10,34 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/images/favicon-mark-crop.png" type="image/png">
 <link rel="stylesheet" href="styles/main.css">
-<style>.wordmark-sub{font-size:115%;}</style>
+<style>
+.wordmark-sub{font-size:115%;}
+
+.hero{
+  position: relative;
+  overflow: hidden;
+}
+.hero::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -8%;
+  width: 58%;
+  height: 100%;
+  background-image: url('assets/images/hero-photo.jpg');
+  background-size: cover;
+  background-position: center 25%;
+  filter: saturate(0.75) contrast(0.95);
+  opacity: 0.14;
+  mix-blend-mode: multiply;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-inner{
+  position: relative;
+  z-index: 1;
+}
+</style>
 </head>
 <body>
 
@@ -51,10 +78,6 @@
           <a class="btn btn-primary" href="#services">Explore services</a>
           <a class="btn btn-ghost" href="https://calendly.com/bykimantonette/30min" target="_blank" rel="noopener noreferrer">Book an introduction</a>
         </div>
-      </div>
-
-      <div class="hero-visual" data-reveal>
-        <img src="assets/images/hero-photo.jpg" alt="A nurse and patient sharing a warm, reassuring moment in a bright clinical research setting" width="960" height="1104" loading="eager">
       </div>
     </div>
   </section>
