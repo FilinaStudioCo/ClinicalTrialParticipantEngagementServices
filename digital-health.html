@@ -7,25 +7,54 @@
 <meta name="description" content="Nursing insight for digital products, research workflows, and patient-centred innovation.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/images/favicon-mark-crop.png" type="image/png">
 <link rel="stylesheet" href="styles/main.css">
 <style>
 .wordmark-sub{font-size:115%;}
+
+.focus-grid{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .focus-grid li{
-  opacity:0;
-  transform: translateY(14px);
-  transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.25s ease;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-size: 0.82rem;
+  padding: 11px 20px;
+  border-radius: 999px;
+  color: #14304a;
+  background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(120deg, #12c2c9, #4f8cff);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 1.5px solid transparent;
+  opacity: 0;
   cursor: default;
-  will-change: opacity, transform;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 .focus-grid li.is-visible{
-  opacity:1;
-  transform: translateY(0);
+  animation: chipFlickerIn 0.7s ease forwards;
 }
 .focus-grid li:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(18,194,201,0.25), 0 0 18px rgba(18,194,201,0.45), 0 0 10px rgba(79,140,255,0.35);
+}
+@keyframes chipFlickerIn{
+  0%   { opacity: 0;   transform: translateY(14px); }
+  15%  { opacity: 0.5; transform: translateY(10px); }
+  30%  { opacity: 0.1; transform: translateY(8px); }
+  50%  { opacity: 0.85;transform: translateY(4px); }
+  70%  { opacity: 0.35;transform: translateY(2px); }
+  100% { opacity: 1;   transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce){
+  .focus-grid li{ opacity: 1; animation: none !important; transition: none; }
 }
 </style>
 </head>
@@ -155,7 +184,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   var items = document.querySelectorAll('.focus-grid li');
   items.forEach(function (item, index) {
-    item.style.transitionDelay = (index * 70) + 'ms';
+    item.style.animationDelay = (index * 90) + 'ms';
   });
   if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
