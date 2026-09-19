@@ -16,34 +16,32 @@
 .focus-grid{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 14px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  background: none;
+  border: none;
 }
 .focus-grid li{
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-family: 'Space Grotesk', var(--font-body);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
-  font-size: 0.82rem;
-  padding: 11px 20px;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  padding: 12px 22px;
   border-radius: 999px;
-  color: #14304a;
-  background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(120deg, #12c2c9, #4f8cff);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
+  color: var(--cocoa);
+  background: linear-gradient(var(--bg-paper), var(--bg-paper)) padding-box, linear-gradient(120deg, var(--terracotta), #f0d9bd) border-box;
   border: 1.5px solid transparent;
   opacity: 0;
   cursor: default;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  transition: box-shadow var(--transition), transform var(--transition);
 }
 .focus-grid li.is-visible{
   animation: chipFlickerIn 0.7s ease forwards;
 }
 .focus-grid li:hover{
   transform: translateY(-2px);
-  box-shadow: 0 0 0 1px rgba(18,194,201,0.25), 0 0 18px rgba(18,194,201,0.45), 0 0 10px rgba(79,140,255,0.35);
+  box-shadow: 0 0 0 1px rgba(201,155,118,0.35), 0 0 18px rgba(201,155,118,0.4);
 }
 @keyframes chipFlickerIn{
   0%   { opacity: 0;   transform: translateY(14px); }
@@ -52,9 +50,6 @@
   50%  { opacity: 0.85;transform: translateY(4px); }
   70%  { opacity: 0.35;transform: translateY(2px); }
   100% { opacity: 1;   transform: translateY(0); }
-}
-@media (prefers-reduced-motion: reduce){
-  .focus-grid li{ opacity: 1; animation: none !important; transition: none; }
 }
 </style>
 </head>
