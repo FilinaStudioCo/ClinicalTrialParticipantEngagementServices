@@ -15,13 +15,15 @@
 <style>
 .wordmark-sub{font-size:115%;}
 
-.hero{
+/* Light Editorial Ivory Hero with Seamless Bottom Fade into Statement Section */
+.hero {
   position: relative;
   overflow: hidden;
-  background: #181411;
-  color: #FAF7F2;
-  padding: 6rem 1.5rem 7rem;
+  background: var(--bg); /* #FAF7F2 Ivory */
+  color: var(--text);
+  padding: 6rem 1.5rem 7.5rem;
 }
+
 #indexDnaCanvas {
   position: absolute;
   inset: 0;
@@ -29,9 +31,13 @@
   height: 100%;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.88;
+  opacity: 0.85;
+  /* Seamless bottom gradient fade into the sand / ivory sections below */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%);
 }
-.hero-inner{
+
+.hero-inner {
   position: relative;
   z-index: 2;
   display: flex;
@@ -39,31 +45,14 @@
   align-items: center;
   text-align: center;
 }
-.hero-text{
+
+.hero-text {
   max-width: 760px;
   margin: 0 auto;
 }
-.hero-actions{
+
+.hero-actions {
   justify-content: center;
-}
-.hero h1, .hero-headline {
-  color: #FAF7F2;
-}
-.hero-sub {
-  color: #EFE7DC;
-}
-.hero-actions .btn-primary {
-  background: var(--terracotta);
-  color: var(--espresso);
-  font-weight: 600;
-}
-.hero-actions .btn-ghost {
-  color: #FAF7F2;
-  border-color: rgba(250, 247, 242, 0.35);
-}
-.hero-actions .btn-ghost:hover {
-  background: rgba(250, 247, 242, 0.12);
-  border-color: var(--terracotta);
 }
 </style>
 </head>
@@ -160,6 +149,7 @@
       <div class="collab-block" data-reveal>
         <h3>James Lind Care</h3>
         <p>Selected participant-engagement projects, including work related to Chronic Obstructive Pulmonary Disease (COPD), Hypertension, and Diabetes.</p>
+        <p>Selected participant-engagement projects across multiple therapy areas.</p>
         <p class="fine-print">Patient-community reach across the USA, UK/England, Denmark, France, Spain, Italy, Sweden, Germany, Austria, Norway, and Poland.</p>
         <p class="fine-print fine-print-muted">Country list reflects the patient-community context and does not imply direct representation in every market.</p>
       </div>
@@ -234,30 +224,31 @@
 
 <script src="scripts/main.js"></script>
 <script>
-  // GPU WebGL 3D Cinematic Particle Helix for Index Hero
+  // Light Editorial Palette 3D Particle Helix for Index Hero
   (function initHero3D() {
     const canvas = document.getElementById('indexDnaCanvas');
     if (!canvas || typeof THREE === 'undefined') return;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(52, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-    camera.position.z = 105;
-    camera.position.x = 8;
+    const camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    camera.position.z = 110;
+    camera.position.x = 6;
 
     const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
     renderer.setSize(canvas.clientWidth, canvas.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+    // Particle sprite with soft warm radial falloff suitable for light backgrounds
     function createParticleTexture() {
       const pCanvas = document.createElement('canvas');
       pCanvas.width = 64;
       pCanvas.height = 64;
       const pCtx = pCanvas.getContext('2d');
       const gradient = pCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
-      gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-      gradient.addColorStop(0.25, 'rgba(255, 225, 190, 0.95)');
-      gradient.addColorStop(0.6, 'rgba(201, 155, 118, 0.45)');
-      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      gradient.addColorStop(0, 'rgba(74, 64, 56, 1)');      // Cocoa core
+      gradient.addColorStop(0.35, 'rgba(201, 155, 118, 0.85)'); // Terracotta body
+      gradient.addColorStop(0.7, 'rgba(201, 155, 118, 0.25)');  // Warm halo
+      gradient.addColorStop(1, 'rgba(250, 247, 242, 0)');     // Fades into Ivory
       pCtx.fillStyle = gradient;
       pCtx.fillRect(0, 0, 64, 64);
       return new THREE.CanvasTexture(pCanvas);
@@ -265,20 +256,21 @@
 
     const pTexture = createParticleTexture();
 
-    const helixCount = 6500;
+    // 1. DNA Double Helix Swarm (Terracotta & Cocoa particles)
+    const helixCount = 5500;
     const helixGeo = new THREE.BufferGeometry();
     const helixPos = new Float32Array(helixCount * 3);
     const helixColors = new Float32Array(helixCount * 3);
 
     const colTerracotta = new THREE.Color('#C99B76');
-    const colGold = new THREE.Color('#E5B382');
-    const colWhite = new THREE.Color('#FFF8F0');
+    const colCocoa = new THREE.Color('#4A4038');
+    const colTaupe = new THREE.Color('#8C7F6E');
 
     for (let i = 0; i < helixCount; i++) {
       const isStrandA = Math.random() > 0.5;
       const progress = (i / helixCount) * 140 - 70;
-      const theta = (progress * 0.12) + (isStrandA ? 0 : Math.PI);
-      const radius = 16 + (Math.random() - 0.5) * 5.5;
+      const theta = (progress * 0.11) + (isStrandA ? 0 : Math.PI);
+      const radius = 18 + (Math.random() - 0.5) * 5;
 
       const x = progress * 1.55;
       const y = Math.sin(theta) * radius + (Math.random() - 0.5) * 4;
@@ -288,7 +280,7 @@
       helixPos[i * 3 + 1] = y;
       helixPos[i * 3 + 2] = z;
 
-      const chosenCol = Math.random() > 0.7 ? colWhite : (Math.random() > 0.4 ? colTerracotta : colGold);
+      const chosenCol = Math.random() > 0.65 ? colCocoa : (Math.random() > 0.3 ? colTerracotta : colTaupe);
       helixColors[i * 3] = chosenCol.r;
       helixColors[i * 3 + 1] = chosenCol.g;
       helixColors[i * 3 + 2] = chosenCol.b;
@@ -298,20 +290,21 @@
     helixGeo.setAttribute('color', new THREE.BufferAttribute(helixColors, 3));
 
     const helixMat = new THREE.PointsMaterial({
-      size: 2.2,
+      size: 2.4,
       map: pTexture,
       transparent: true,
-      opacity: 0.9,
+      opacity: 0.65,
       vertexColors: true,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending, // Clean, crisp rendering over light ivory canvas
       depthWrite: false
     });
 
     const helixMesh = new THREE.Points(helixGeo, helixMat);
-    helixMesh.rotation.z = 0.24;
+    helixMesh.rotation.z = 0.22;
     scene.add(helixMesh);
 
-    const coronaCount = 2800;
+    // 2. Bioluminescent Corona Orb (Left Cell Swarm)
+    const coronaCount = 2200;
     const coronaGeo = new THREE.BufferGeometry();
     const coronaPos = new Float32Array(coronaCount * 3);
     const coronaColors = new Float32Array(coronaCount * 3);
@@ -321,9 +314,9 @@
       const v = Math.random();
       const theta = u * 2.0 * Math.PI;
       const phi = Math.acos(2.0 * v - 1.0);
-      const r = 24 + (Math.random() - 0.5) * 8;
+      const r = 25 + (Math.random() - 0.5) * 8;
 
-      const x = -55 + r * Math.sin(phi) * Math.cos(theta);
+      const x = -58 + r * Math.sin(phi) * Math.cos(theta);
       const y = r * Math.sin(phi) * Math.sin(theta);
       const z = r * Math.cos(phi);
 
@@ -331,7 +324,7 @@
       coronaPos[i * 3 + 1] = y;
       coronaPos[i * 3 + 2] = z;
 
-      const chosenCol = Math.random() > 0.6 ? colGold : colTerracotta;
+      const chosenCol = Math.random() > 0.5 ? colTerracotta : colTaupe;
       coronaColors[i * 3] = chosenCol.r;
       coronaColors[i * 3 + 1] = chosenCol.g;
       coronaColors[i * 3 + 2] = chosenCol.b;
@@ -344,16 +337,17 @@
       size: 2.8,
       map: pTexture,
       transparent: true,
-      opacity: 0.92,
+      opacity: 0.6,
       vertexColors: true,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending,
       depthWrite: false
     });
 
     const coronaMesh = new THREE.Points(coronaGeo, coronaMat);
     scene.add(coronaMesh);
 
-    const dustCount = 800;
+    // 3. Ambient Drifting Dust Cells
+    const dustCount = 600;
     const dustGeo = new THREE.BufferGeometry();
     const dustPos = new Float32Array(dustCount * 3);
 
@@ -365,12 +359,12 @@
 
     dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
     const dustMat = new THREE.PointsMaterial({
-      size: 3.5,
+      size: 3.2,
       map: pTexture,
       color: 0xC99B76,
       transparent: true,
-      opacity: 0.45,
-      blending: THREE.AdditiveBlending,
+      opacity: 0.35,
+      blending: THREE.NormalBlending,
       depthWrite: false
     });
 
@@ -382,13 +376,13 @@
       requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
-      helixMesh.rotation.x = elapsedTime * 0.35;
-      helixMesh.rotation.y = Math.sin(elapsedTime * 0.15) * 0.1;
+      helixMesh.rotation.x = elapsedTime * 0.32;
+      helixMesh.rotation.y = Math.sin(elapsedTime * 0.15) * 0.08;
 
-      coronaMesh.rotation.y = elapsedTime * 0.4;
-      coronaMesh.rotation.z = elapsedTime * 0.25;
+      coronaMesh.rotation.y = elapsedTime * 0.35;
+      coronaMesh.rotation.z = elapsedTime * 0.22;
 
-      dustMesh.rotation.y = elapsedTime * 0.04;
+      dustMesh.rotation.y = elapsedTime * 0.03;
 
       renderer.render(scene, camera);
     }
