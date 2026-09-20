@@ -170,15 +170,71 @@
       </div>
     </div>
 
-    <div class="credentials-col credentials-col-wide" data-reveal style="margin-top: 3.5rem;">
-      <h3>International professional engagement</h3>
-      <ul class="credential-list">
-        <li>ESNO Associate<br><span class="credential-sub">European Specialist Nurses Organisation</span></li>
-        <li>Cross-ERN Surgical OR Nurses Network member<br><span class="credential-sub">Erasmus Medical Center, Rotterdam, Netherlands</span></li>
-        <li>OR Management - Perioperative Registered Nurse (Department of Obstetrics, Gynecology, and Pediatric Surgery)<br><span class="credential-sub">University Hospital Leipzig, Germany</span></li>
-        <li>Dialectica — Digital Healthcare Consultant<br><span class="credential-sub">London, United Kingdom</span></li>
-        <li>James Lind Care — Clinical Research Nurse<br><span class="credential-sub">Copenhagen, Denmark</span></li>
-      </ul>
+    <!-- International Professional Engagement as matching Revolving Stack -->
+    <div class="section-head" data-reveal style="margin-top: 5rem; padding: 0;">
+      <p class="overline">Global Network</p>
+      <h2>International professional<br>engagement.</h2>
+    </div>
+
+    <div class="credentials-carousel-wrap" data-reveal>
+      <div class="credentials-stack" id="engagementStack">
+
+        <div class="cred-card">
+          <div class="cred-badge">ESNO</div>
+          <div class="cred-info">
+            <h3>ESNO Associate</h3>
+            <p class="cred-sub">European Specialist Nurses Organisation</p>
+          </div>
+          <span class="cred-category">Europe</span>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-badge">Cross-ERN</div>
+          <div class="cred-info">
+            <h3>Cross-ERN Surgical OR Nurses Network member</h3>
+            <p class="cred-sub">Erasmus Medical Center, Rotterdam, Netherlands</p>
+          </div>
+          <span class="cred-category">Netherlands</span>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-badge">UKL</div>
+          <div class="cred-info">
+            <h3>OR Management - Perioperative Registered Nurse</h3>
+            <p class="cred-sub">Department of Obstetrics, Gynecology &amp; Pediatric Surgery — University Hospital Leipzig</p>
+          </div>
+          <span class="cred-category">Germany</span>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-badge">Advisory</div>
+          <div class="cred-info">
+            <h3>Digital Healthcare Consultant</h3>
+            <p class="cred-sub">Dialectica — London, United Kingdom</p>
+          </div>
+          <span class="cred-category">UK</span>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-badge">Research</div>
+          <div class="cred-info">
+            <h3>Clinical Research Nurse</h3>
+            <p class="cred-sub">James Lind Care — Copenhagen, Denmark</p>
+          </div>
+          <span class="cred-category">Denmark</span>
+        </div>
+
+      </div>
+
+      <div class="stack-controls">
+        <button type="button" id="prevEngBtn" aria-label="Previous engagement">
+          <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        </button>
+        <span class="stack-controls-divider"></span>
+        <button type="button" id="nextEngBtn" aria-label="Next engagement">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+      </div>
     </div>
   </section>
 
