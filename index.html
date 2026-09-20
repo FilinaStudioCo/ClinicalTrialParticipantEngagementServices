@@ -31,7 +31,7 @@
   height: 100%;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.82;
+  opacity: 0.72;
   -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
   mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
 }
@@ -45,13 +45,39 @@
   text-align: center;
 }
 
+/* Glassmorphic frosted vignette ensuring maximum text clarity */
 .hero-text {
-  max-width: 760px;
+  max-width: 780px;
   margin: 0 auto;
+  background: rgba(250, 247, 242, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 2.8rem 2.4rem;
+  border-radius: 28px;
+  border: 1px solid rgba(201, 155, 118, 0.28);
+  box-shadow: 0 12px 35px rgba(38, 32, 27, 0.05);
+}
+
+.hero h1, .hero-headline {
+  color: var(--espresso);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.hero-sub {
+  color: var(--cocoa);
+  font-weight: 450;
 }
 
 .hero-actions {
   justify-content: center;
+  margin-top: 1.8rem;
+}
+
+@media (max-width: 600px) {
+  .hero-text {
+    padding: 2rem 1.25rem;
+    border-radius: 20px;
+  }
 }
 </style>
 </head>
@@ -223,8 +249,8 @@
 
 <script src="scripts/main.js"></script>
 <script>
-  // High-Density Micro-Ember 3D Helix (Light Palette with Soft Ambient Glow)
-  (function initLightCinematicHelix() {
+  // High-End Palette-Matched Warm Gold & Terracotta Micro-Particle Helix
+  (function initWarmGoldHelix() {
     const canvas = document.getElementById('indexDnaCanvas');
     if (!canvas || typeof THREE === 'undefined') return;
 
@@ -237,33 +263,34 @@
     renderer.setSize(canvas.clientWidth, canvas.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Refined micro-orb sprite with warm gold-terracotta halo
-    function createMicroOrbTexture() {
+    // Warm champagne/gold ember particle sprite
+    function createGoldEmberTexture() {
       const pCanvas = document.createElement('canvas');
       pCanvas.width = 64;
       pCanvas.height = 64;
       const pCtx = pCanvas.getContext('2d');
       const gradient = pCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
-      gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');         // Luminous nucleus
-      gradient.addColorStop(0.25, 'rgba(217, 168, 126, 0.9)');    // Gold-terracotta
-      gradient.addColorStop(0.6, 'rgba(180, 130, 92, 0.35)');     // Soft warm halo
+      gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');          // Pure luminous core
+      gradient.addColorStop(0.25, 'rgba(235, 195, 145, 0.95)');     // Warm Champagne Gold
+      gradient.addColorStop(0.55, 'rgba(201, 155, 118, 0.45)');    // Terracotta body
       gradient.addColorStop(1, 'rgba(250, 247, 242, 0)');
       pCtx.fillStyle = gradient;
       pCtx.fillRect(0, 0, 64, 64);
       return new THREE.CanvasTexture(pCanvas);
     }
 
-    const pTexture = createMicroOrbTexture();
+    const pTexture = createGoldEmberTexture();
 
-    // 1. High-Density Micro-Ember Double Helix (8,000 fine particles)
-    const helixCount = 8000;
+    // 1. Double Helix Particles (Warm Gold, Honey Amber & Terracotta)
+    const helixCount = 8500;
     const helixGeo = new THREE.BufferGeometry();
     const helixPos = new Float32Array(helixCount * 3);
     const helixColors = new Float32Array(helixCount * 3);
 
-    const colTerracotta = new THREE.Color('#B57D50');
-    const colGold = new THREE.Color('#D49E6A');
-    const colWarmWhite = new THREE.Color('#FFF5EA');
+    const colChampagne = new THREE.Color('#EBC391'); // Warm champagne gold
+    const colAmber = new THREE.Color('#D89F6B');     // Honey gold
+    const colTerracotta = new THREE.Color('#C99B76'); // Palette terracotta
+    const colBright = new THREE.Color('#FFF8F0');
 
     for (let i = 0; i < helixCount; i++) {
       const isStrandA = Math.random() > 0.5;
@@ -279,7 +306,8 @@
       helixPos[i * 3 + 1] = y;
       helixPos[i * 3 + 2] = z;
 
-      const chosenCol = Math.random() > 0.75 ? colWarmWhite : (Math.random() > 0.4 ? colGold : colTerracotta);
+      const r = Math.random();
+      const chosenCol = r > 0.7 ? colBright : (r > 0.4 ? colChampagne : (r > 0.2 ? colAmber : colTerracotta));
       helixColors[i * 3] = chosenCol.r;
       helixColors[i * 3 + 1] = chosenCol.g;
       helixColors[i * 3 + 2] = chosenCol.b;
@@ -289,10 +317,10 @@
     helixGeo.setAttribute('color', new THREE.BufferAttribute(helixColors, 3));
 
     const helixMat = new THREE.PointsMaterial({
-      size: 1.6, // Fine micro-size avoids coarse pepper look
+      size: 1.7,
       map: pTexture,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.88,
       vertexColors: true,
       depthWrite: false
     });
@@ -301,8 +329,8 @@
     helixMesh.rotation.z = 0.24;
     scene.add(helixMesh);
 
-    // 2. Bioluminescent Corona Orb (Left Cell Ring - 3,200 micro-particles)
-    const coronaCount = 3200;
+    // 2. Bioluminescent Corona Orb (Warm Golden Cell Ring)
+    const coronaCount = 3400;
     const coronaGeo = new THREE.BufferGeometry();
     const coronaPos = new Float32Array(coronaCount * 3);
     const coronaColors = new Float32Array(coronaCount * 3);
@@ -322,7 +350,7 @@
       coronaPos[i * 3 + 1] = y;
       coronaPos[i * 3 + 2] = z;
 
-      const chosenCol = Math.random() > 0.6 ? colGold : colTerracotta;
+      const chosenCol = Math.random() > 0.5 ? colChampagne : colAmber;
       coronaColors[i * 3] = chosenCol.r;
       coronaColors[i * 3 + 1] = chosenCol.g;
       coronaColors[i * 3 + 2] = chosenCol.b;
@@ -332,10 +360,10 @@
     coronaGeo.setAttribute('color', new THREE.BufferAttribute(coronaColors, 3));
 
     const coronaMat = new THREE.PointsMaterial({
-      size: 1.8,
+      size: 1.9,
       map: pTexture,
       transparent: true,
-      opacity: 0.88,
+      opacity: 0.9,
       vertexColors: true,
       depthWrite: false
     });
@@ -343,7 +371,7 @@
     const coronaMesh = new THREE.Points(coronaGeo, coronaMat);
     scene.add(coronaMesh);
 
-    // 3. Subtle Ambient Floating Bokeh Particles
+    // 3. Subtle Ambient Golden Dust Particles
     const dustCount = 450;
     const dustGeo = new THREE.BufferGeometry();
     const dustPos = new Float32Array(dustCount * 3);
@@ -358,9 +386,9 @@
     const dustMat = new THREE.PointsMaterial({
       size: 2.2,
       map: pTexture,
-      color: 0xC99B76,
+      color: 0xEBC391,
       transparent: true,
-      opacity: 0.4,
+      opacity: 0.45,
       depthWrite: false
     });
 
