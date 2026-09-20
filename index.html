@@ -15,18 +15,39 @@
 <style>
 .wordmark-sub{font-size:115%;}
 
-/* Seamless Integrated Hero with Center Particle Radial Fade */
+/* Header overlays hero so particles extend behind title & CTA */
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  box-shadow: none;
+  z-index: 20;
+}
+
+.wordmark-text,
+.primary-nav a {
+  text-shadow: 0 0 16px rgba(250, 247, 242, 0.9), 0 0 8px rgba(250, 247, 242, 0.85);
+}
+
+.header-logo-icon {
+  filter: drop-shadow(0 0 6px rgba(250, 247, 242, 0.9));
+}
+
+/* Seamless Integrated Hero with Center Particle Radial Fade, extended up behind header */
 .hero {
   position: relative;
   overflow: hidden;
   background: radial-gradient(circle at 35% 45%, #F5EFE6 0%, var(--bg) 80%, #F5EFE6 100%);
   color: var(--text);
-  padding: 6.5rem 1.5rem 8rem;
+  padding: 11rem 1.5rem 8rem;
 }
 
 /* Dual radial + linear gradient mask:
-   1. Fades the center where text sits so particles never compete with text
-   2. Dissolves the bottom into the Statement section */
+   1. Softens the top strip so particles blend behind the header
+   2. Fades the center where text sits so particles never compete with text
+   3. Dissolves the bottom into the Statement section */
 #indexDnaCanvas {
   position: absolute;
   inset: 0;
@@ -34,14 +55,14 @@
   height: 100%;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.60; /* Soft ambient atmosphere */
+  opacity: 0.60;
   -webkit-mask-image: 
-    radial-gradient(ellipse 65% 55% at 50% 48%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,1) 100%),
-    linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 72%, rgba(0,0,0,0) 100%);
+    radial-gradient(ellipse 65% 55% at 50% 52%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,1) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,1) 14%, rgba(0,0,0,1) 72%, rgba(0,0,0,0) 100%);
   -webkit-mask-composite: destination-in;
   mask-image: 
-    radial-gradient(ellipse 65% 55% at 50% 48%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,1) 100%),
-    linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 72%, rgba(0,0,0,0) 100%);
+    radial-gradient(ellipse 65% 55% at 50% 52%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,1) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,1) 14%, rgba(0,0,0,1) 72%, rgba(0,0,0,0) 100%);
   mask-composite: intersect;
 }
 
@@ -54,7 +75,6 @@
   text-align: center;
 }
 
-/* Text sits directly on the page canvas — no box, no border, pure typography */
 .hero-text {
   max-width: 760px;
   margin: 0 auto;
