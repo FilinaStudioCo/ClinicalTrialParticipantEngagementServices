@@ -1,3 +1,40 @@
+// Mobile nav toggle
+const navToggle = document.getElementById("navToggle");
+const primaryNav = document.getElementById("primaryNav");
+
+if (navToggle && primaryNav) {
+  navToggle.addEventListener("click", () => {
+    const expanded = navToggle.getAttribute("aria-expanded") === "true";
+    navToggle.setAttribute("aria-expanded", String(!expanded));
+    primaryNav.classList.toggle("open");
+  });
+}
+
+// Scroll reveal observer
+const reveals = document.querySelectorAll("[data-reveal]");
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+  reveals.forEach((el) => observer.observe(el));
+} else {
+  reveals.forEach((el) => el.classList.add("is-visible"));
+}
+
+// Year in footer
+const yearSpan = document.getElementById("year");
+if (yearSpan) {
+  yearSpan.textContent = new Date().getFullYear();
+}
+
 // Auto-cycling stacked credentials effect (revolving card stack mockup)
 document.addEventListener("DOMContentLoaded", () => {
   const stack = document.getElementById("credentialsStack");
