@@ -35,8 +35,8 @@ if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear();
 }
 
-// Auto-cycling stacked credentials effect (revolving card stack mockup)
-document.addEventListener("DOMContentLoaded", () => {
+// Smooth Continuous Auto-Scrolling for Credentials Stack
+function initCredentialsScroller() {
   const stack = document.getElementById("credentialsStack");
   const nextBtn = document.getElementById("nextCredBtn");
   const prevBtn = document.getElementById("prevCredBtn");
@@ -44,41 +44,74 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function cycleNext() {
     const firstCard = stack.firstElementChild;
-    if (!firstCard) return;
-    firstCard.style.transition = "transform 0.35s ease, opacity 0.35s ease, margin-top 0.35s ease";
-    firstCard.style.marginTop = `-${firstCard.offsetHeight + 14}px`;
-    firstCard.style.opacity = "0";
+    if (!firstCard || stack.children.length < 2) return;
+    
+    const cardHeight = firstCard.offsetHeight;
+    const gap = 14;
+    const shift = cardHeight + gap;
+
+    firstCard.style.transition = "transform 0.55s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.55s ease, margin-top 0.55s cubic-bezier(0.25, 1, 0.5, 1)";
+    firstCard.style.marginTop = `-${shift}px`;
+    firstCard.style.opacity = "0.2";
+    firstCard.style.transform = "scale(0.96)";
 
     setTimeout(() => {
       firstCard.style.transition = "none";
       firstCard.style.marginTop = "0";
       firstCard.style.opacity = "1";
+      firstCard.style.transform = "scale(1)";
       stack.appendChild(firstCard);
-    }, 350);
+    }, 550);
   }
 
   function cyclePrev() {
     const lastCard = stack.lastElementChild;
-    if (!lastCard) return;
+    if (!lastCard || stack.children.length < 2) return;
+
+    const cardHeight = lastCard.offsetHeight;
+    const gap = 14;
+    const shift = cardHeight + gap;
+
     lastCard.style.transition = "none";
-    lastCard.style.marginTop = `-${lastCard.offsetHeight + 14}px`;
-    lastCard.style.opacity = "0";
+    lastCard.style.marginTop = `-${shift}px`;
+    lastCard.style.opacity = "0.2";
+    lastCard.style.transform = "scale(0.96)";
     stack.insertBefore(lastCard, stack.firstElementChild);
 
     requestAnimationFrame(() => {
-      lastCard.style.transition = "transform 0.35s ease, opacity 0.35s ease, margin-top 0.35s ease";
-      lastCard.style.marginTop = "0";
-      lastCard.style.opacity = "1";
+      requestAnimationFrame(() => {
+        lastCard.style.transition = "transform 0.55s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.55s ease, margin-top 0.55s cubic-bezier(0.25, 1, 0.5, 1)";
+        lastCard.style.marginTop = "0";
+        lastCard.style.opacity = "1";
+        lastCard.style.transform = "scale(1)";
+      });
     });
   }
 
-  let timer = setInterval(cycleNext, 3400);
-  stack.addEventListener("mouseenter", () => clearInterval(timer));
+  let autoScrollTimer = setInterval(cycleNext, 2600);
+
+  stack.addEventListener("mouseenter", () => clearInterval(autoScrollTimer));
   stack.addEventListener("mouseleave", () => {
-    clearInterval(timer);
-    timer = setInterval(cycleNext, 3400);
+    clearInterval(autoScrollTimer);
+    autoScrollTimer = setInterval(cycleNext, 2600);
   });
 
-  if (nextBtn) nextBtn.addEventListener("click", () => { clearInterval(timer); cycleNext(); });
-  if (prevBtn) prevBtn.addEventListener("click", () => { clearInterval(timer); cyclePrev(); });
-});
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      clearInterval(autoScrollTimer);
+      cycleNext();
+    });
+  }
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      clearInterval(autoScrollTimer);
+      cyclePrev();
+    });
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCredentialsScroller);
+} else {
+  initCredentialsScroller();
+}
