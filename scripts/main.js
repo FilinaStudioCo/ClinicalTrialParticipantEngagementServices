@@ -35,11 +35,11 @@ if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear();
 }
 
-// Smooth Continuous Auto-Scrolling for Credentials Stack
-function initCredentialsScroller() {
-  const stack = document.getElementById("credentialsStack");
-  const nextBtn = document.getElementById("nextCredBtn");
-  const prevBtn = document.getElementById("prevCredBtn");
+// Universal smooth continuous auto-scrolling helper for revolving stacks
+function createRevolvingStack(stackId, prevBtnId, nextBtnId, interval = 2800) {
+  const stack = document.getElementById(stackId);
+  const nextBtn = document.getElementById(nextBtnId);
+  const prevBtn = document.getElementById(prevBtnId);
   if (!stack) return;
 
   function cycleNext() {
@@ -88,30 +88,35 @@ function initCredentialsScroller() {
     });
   }
 
-  let autoScrollTimer = setInterval(cycleNext, 2600);
+  let timer = setInterval(cycleNext, interval);
 
-  stack.addEventListener("mouseenter", () => clearInterval(autoScrollTimer));
+  stack.addEventListener("mouseenter", () => clearInterval(timer));
   stack.addEventListener("mouseleave", () => {
-    clearInterval(autoScrollTimer);
-    autoScrollTimer = setInterval(cycleNext, 2600);
+    clearInterval(timer);
+    timer = setInterval(cycleNext, interval);
   });
 
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
-      clearInterval(autoScrollTimer);
+      clearInterval(timer);
       cycleNext();
     });
   }
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
-      clearInterval(autoScrollTimer);
+      clearInterval(timer);
       cyclePrev();
     });
   }
 }
 
+function initAllStacks() {
+  createRevolvingStack("credentialsStack", "prevCredBtn", "nextCredBtn", 2600);
+  createRevolvingStack("engagementStack", "prevEngBtn", "nextEngBtn", 3200);
+}
+
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initCredentialsScroller);
+  document.addEventListener("DOMContentLoaded", initAllStacks);
 } else {
-  initCredentialsScroller();
+  initAllStacks();
 }
