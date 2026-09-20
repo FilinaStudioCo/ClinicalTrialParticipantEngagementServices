@@ -64,31 +64,108 @@
       <h2>Licensure, training,<br>and specialist recognition.</h2>
     </div>
 
-    <div class="credentials-columns">
-      <div class="credentials-col" data-reveal>
-        <h3>Licensure &amp; language</h3>
-        <ul class="credential-list">
-          <li>US Registered Nurse<br><span class="credential-sub">New York State</span></li>
-          <li>Registered Nurse<br><span class="credential-sub">Germany</span></li>
-          <li>Registered Nurse<br><span class="credential-sub">Philippines</span></li>
-          <li>ICH-GCP<br><span class="credential-sub">National Institute Health and Care Research</span></li>
-          <li>Clinical Research Nurse Certification<br><span class="credential-sub">Medical University of Cologne</span></li>
-        <li>German · English · Tagalog</li>
-        </ul>
+    <div class="credentials-carousel-wrap" data-reveal>
+      <div class="credentials-stack" id="credentialsStack">
+
+        <div class="cred-card">
+          <div class="cred-badge">RN · US</div>
+          <div class="cred-info">
+            <h3>US Registered Nurse</h3>
+            <p class="cred-sub">New York State</p>
+          </div>
+          <span class="cred-category">Licensure</span>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-badge">RN · DE</div>
+          <div class="cred-info">
+            <h3>Registered Nurse</h3>
+            <p class="cred-sub">Germany</p>
+          </div>
+          <span class="cred-category">Licensure</span>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-badge">RN · PH</div>
+          <div class="cred-info">
+            <h3>Registered Nurse</h3>
+            <p class="cred-sub">Philippines</p>
+          </div>
+          <span class="cred-category">Licensure</span>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-badge">GCP</div>
+          <div class="cred-info">
+            <h3>ICH-GCP</h3>
+            <p class="cred-sub">National Institute Health and Care Research</p>
+          </div>
+          <span class="cred-category">Clinical Research</span>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-badge">CRN</div>
+          <div class="cred-info">
+            <h3>Clinical Research Nurse Certification</h3>
+            <p class="cred-sub">Medical University of Cologne</p>
+          </div>
+          <span class="cred-category">Certification</span>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-badge">LANG</div>
+          <div class="cred-info">
+            <h3>German · English · Tagalog</h3>
+            <p class="cred-sub">Professional working proficiency</p>
+          </div>
+          <span class="cred-category">Language</span>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-badge">MSc</div>
+          <div class="cred-info">
+            <h3>Master of Science Entrepreneurship in Digital Health</h3>
+            <p class="cred-sub">Medical University of Graz, Austria</p>
+          </div>
+          <span class="cred-category">Education</span>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-badge">BSN</div>
+          <div class="cred-info">
+            <h3>Bachelor of Science in Nursing</h3>
+            <p class="cred-sub">Centro Escolar University, Philippines</p>
+          </div>
+          <span class="cred-category">Education</span>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-badge">UX</div>
+          <div class="cred-info">
+            <h3>Design Thinking &amp; Fast Prototyping</h3>
+            <p class="cred-sub">Medical University of Lodz, Poland</p>
+          </div>
+          <span class="cred-category">Specialist</span>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-badge">R&amp;D</div>
+          <div class="cred-info">
+            <h3>Medical Research &amp; Development</h3>
+            <p class="cred-sub">EURORDIS-Rare Diseases Europe</p>
+          </div>
+          <span class="cred-category">Research</span>
+        </div>
+
       </div>
 
-      <div class="credentials-col" data-reveal>
-        <h3>Education &amp; specialist development</h3>
-        <ul class="credential-list">
-          <li>Master of Science Entrepreneurship in Digital Health<br><span class="credential-sub">Medical University of Graz, Austria</span></li>
-          <li>Bachelor of Science in Nursing<br><span class="credential-sub">Centro Escolar University, Philippines</span></li>
-          <li>Design Thinking &amp; Fast Prototyping<br><span class="credential-sub">Medical University of Lodz, Poland</span></li>
-          <li>Medical Research &amp; Development<br><span class="credential-sub">EURORDIS-Rare Diseases Europe</span></li>
-        </ul>
+      <div class="stack-controls">
+        <button type="button" id="prevCredBtn" aria-label="Previous credential">↑</button>
+        <button type="button" id="nextCredBtn" aria-label="Next credential">↓</button>
       </div>
     </div>
 
-    <div class="credentials-col credentials-col-wide" data-reveal>
+    <div class="credentials-col credentials-col-wide" data-reveal style="margin-top: 3.5rem;">
       <h3>International professional engagement</h3>
       <ul class="credential-list">
         <li>ESNO Associate<br><span class="credential-sub">European Specialist Nurses Organisation</span></li>
