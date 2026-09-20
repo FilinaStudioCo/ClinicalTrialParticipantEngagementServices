@@ -15,15 +15,18 @@
 <style>
 .wordmark-sub{font-size:115%;}
 
-/* Elegant Light Sand Hero with Seamless Transition into Statement Section */
+/* Seamless Integrated Hero with Center Particle Radial Fade */
 .hero {
   position: relative;
   overflow: hidden;
-  background: radial-gradient(circle at 35% 45%, #F4ECE1 0%, var(--bg) 80%, #F5EFE6 100%);
+  background: radial-gradient(circle at 35% 45%, #F5EFE6 0%, var(--bg) 80%, #F5EFE6 100%);
   color: var(--text);
   padding: 6.5rem 1.5rem 8rem;
 }
 
+/* Dual radial + linear gradient mask:
+   1. Fades the center where text sits so particles never compete with text
+   2. Dissolves the bottom into the Statement section */
 #indexDnaCanvas {
   position: absolute;
   inset: 0;
@@ -31,9 +34,15 @@
   height: 100%;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.72;
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+  opacity: 0.60; /* Soft ambient atmosphere */
+  -webkit-mask-image: 
+    radial-gradient(ellipse 65% 55% at 50% 48%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,1) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 72%, rgba(0,0,0,0) 100%);
+  -webkit-mask-composite: destination-in;
+  mask-image: 
+    radial-gradient(ellipse 65% 55% at 50% 48%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,1) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 72%, rgba(0,0,0,0) 100%);
+  mask-composite: intersect;
 }
 
 .hero-inner {
@@ -45,39 +54,31 @@
   text-align: center;
 }
 
-/* Glassmorphic frosted vignette ensuring maximum text clarity */
+/* Text sits directly on the page canvas — no box, no border, pure typography */
 .hero-text {
-  max-width: 780px;
+  max-width: 760px;
   margin: 0 auto;
-  background: rgba(250, 247, 242, 0.78);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 2.8rem 2.4rem;
-  border-radius: 28px;
-  border: 1px solid rgba(201, 155, 118, 0.28);
-  box-shadow: 0 12px 35px rgba(38, 32, 27, 0.05);
 }
 
 .hero h1, .hero-headline {
   color: var(--espresso);
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  text-shadow: 0 0 24px rgba(250, 247, 242, 0.95), 0 0 12px rgba(250, 247, 242, 0.85);
 }
 
 .hero-sub {
   color: var(--cocoa);
-  font-weight: 450;
+  font-size: 1.1rem;
+  line-height: 1.68;
+  max-width: 54ch;
+  margin: 0 auto 1.5rem;
+  text-shadow: 0 0 20px rgba(250, 247, 242, 0.95), 0 0 8px rgba(250, 247, 242, 0.85);
 }
 
 .hero-actions {
   justify-content: center;
   margin-top: 1.8rem;
-}
-
-@media (max-width: 600px) {
-  .hero-text {
-    padding: 2rem 1.25rem;
-    border-radius: 20px;
-  }
 }
 </style>
 </head>
@@ -263,16 +264,15 @@
     renderer.setSize(canvas.clientWidth, canvas.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Warm champagne/gold ember particle sprite
     function createGoldEmberTexture() {
       const pCanvas = document.createElement('canvas');
       pCanvas.width = 64;
       pCanvas.height = 64;
       const pCtx = pCanvas.getContext('2d');
       const gradient = pCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
-      gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');          // Pure luminous core
-      gradient.addColorStop(0.25, 'rgba(235, 195, 145, 0.95)');     // Warm Champagne Gold
-      gradient.addColorStop(0.55, 'rgba(201, 155, 118, 0.45)');    // Terracotta body
+      gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+      gradient.addColorStop(0.25, 'rgba(235, 195, 145, 0.95)');
+      gradient.addColorStop(0.55, 'rgba(201, 155, 118, 0.45)');
       gradient.addColorStop(1, 'rgba(250, 247, 242, 0)');
       pCtx.fillStyle = gradient;
       pCtx.fillRect(0, 0, 64, 64);
@@ -287,9 +287,9 @@
     const helixPos = new Float32Array(helixCount * 3);
     const helixColors = new Float32Array(helixCount * 3);
 
-    const colChampagne = new THREE.Color('#EBC391'); // Warm champagne gold
-    const colAmber = new THREE.Color('#D89F6B');     // Honey gold
-    const colTerracotta = new THREE.Color('#C99B76'); // Palette terracotta
+    const colChampagne = new THREE.Color('#EBC391');
+    const colAmber = new THREE.Color('#D89F6B');
+    const colTerracotta = new THREE.Color('#C99B76');
     const colBright = new THREE.Color('#FFF8F0');
 
     for (let i = 0; i < helixCount; i++) {
