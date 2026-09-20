@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview: 3D Cinematic Particle Helix — Clinical Trial Engagement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/main.css">
+<!-- Three.js CDN for GPU-accelerated volumetric particle rendering -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  .cinematic-hero-section {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    overflow: hidden;
+    background: #181411; /* Warm dark canvas matching espresso tones */
+  }
+
+  #webglDnaCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .cinematic-glass-card {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
+    text-align: center;
+    background: rgba(38, 32, 27, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 3.5rem 2.5rem;
+    border-radius: 28px;
+    border: 1px solid rgba(201, 155, 118, 0.35);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    color: #FAF7F2;
+  }
+
+  .cinematic-glass-card h2 {
+    color: #FAF7F2;
+  }
+
+  .cinematic-glass-card .bio {
+    color: #EFE7DC;
+    margin: 0 auto 1.5rem;
+  }
+
+  .cinematic-glass-card .btn-primary {
+    background: var(--terracotta);
+    color: var(--espresso);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="wordmark-link">
+      <img src="assets/images/favicon-mark-crop.png" alt="" class="header-logo-icon" width="36" height="36">
+      <span class="wordmark-text">
+        <span class="wordmark-sub">Clinical Trial Participant Engagement Services</span>
+      </span>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="cinematic-hero-section">
+    <!-- WebGL Three.js Particle Point Cloud Canvas -->
+    <canvas id="webglDnaCanvas"></canvas>
+
+    <div class="cinematic-glass-card">
+      <p class="overline">Precision Clinical Engagement</p>
+      <h2>Cinematic Cellular &amp; DNA Particle Stream</h2>
+      <p class="bio">Procedural 3D GPU point cloud: 8,000 glowing ember particles forming the double helix paired with a bioluminescent corona orb and drifting bokeh cells, rendered in terracotta and warm sand hues.</p>
+      <a class="btn btn-primary" href="about.html">Back to About</a>
+    </div>
+  </section>
+</main>
+
+<script>
+  // 3D Three.js Volumetric Particle Swarm
+  const container = document.querySelector('.cinematic-hero-section');
+  const canvas = document.getElementById('webglDnaCanvas');
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 110;
+  camera.position.x = 10;
+
+  const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Generate Glowing Circular Particle Texture
+  function createParticleTexture() {
+    const pCanvas = document.createElement('canvas');
+    pCanvas.width = 64;
+    pCanvas.height = 64;
+    const pCtx = pCanvas.getContext('2d');
+    const gradient = pCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+    gradient.addColorStop(0.2, 'rgba(255, 220, 180, 0.9)');
+    gradient.addColorStop(0.6, 'rgba(201, 155, 118, 0.4)');
+    gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    pCtx.fillStyle = gradient;
+    pCtx.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(pCanvas);
+  }
+
+  const pTexture = createParticleTexture();
+
+  // 1. DNA Double Helix Swarm (6,000 particles)
+  const helixCount = 6500;
+  const helixGeo = new THREE.BufferGeometry();
+  const helixPos = new Float32Array(helixCount * 3);
+  const helixColors = new Float32Array(helixCount * 3);
+
+  const colTerracotta = new THREE.Color('#C99B76');
+  const colGold = new THREE.Color('#E5B382');
+  const colWhite = new THREE.Color('#FFF8F0');
+  const colCocoa = new THREE.Color('#8C7F6E');
+
+  for (let i = 0; i < helixCount; i++) {
+    const isStrandA = Math.random() > 0.5;
+    const progress = (i / helixCount) * 140 - 70; // length along X
+    const theta = (progress * 0.12) + (isStrandA ? 0 : Math.PI);
+    const radius = 16 + (Math.random() - 0.5) * 5; // particle volume jitter
+
+    const x = progress * 1.5;
+    const y = Math.sin(theta) * radius + (Math.random() - 0.5) * 4;
+    const z = Math.cos(theta) * radius + (Math.random() - 0.5) * 4;
+
+    helixPos[i * 3] = x;
+    helixPos[i * 3 + 1] = y;
+    helixPos[i * 3 + 2] = z;
+
+    const chosenCol = Math.random() > 0.7 ? colWhite : (Math.random() > 0.4 ? colTerracotta : colGold);
+    helixColors[i * 3] = chosenCol.r;
+    helixColors[i * 3 + 1] = chosenCol.g;
+    helixColors[i * 3 + 2] = chosenCol.b;
+  }
+
+  helixGeo.setAttribute('position', new THREE.BufferAttribute(helixPos, 3));
+  helixGeo.setAttribute('color', new THREE.BufferAttribute(helixColors, 3));
+
+  const helixMat = new THREE.PointsMaterial({
+    size: 2.2,
+    map: pTexture,
+    transparent: true,
+    opacity: 0.88,
+    vertexColors: true,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+
+  const helixMesh = new THREE.Points(helixGeo, helixMat);
+  helixMesh.rotation.z = 0.22;
+  scene.add(helixMesh);
+
+  // 2. Bioluminescent Corona Orb (Left Cell Ring - 2,500 particles)
+  const coronaCount = 2800;
+  const coronaGeo = new THREE.BufferGeometry();
+  const coronaPos = new Float32Array(coronaCount * 3);
+  const coronaColors = new Float32Array(coronaCount * 3);
+
+  for (let i = 0; i < coronaCount; i++) {
+    const u = Math.random();
+    const v = Math.random();
+    const theta = u * 2.0 * Math.PI;
+    const phi = Math.acos(2.0 * v - 1.0);
+    const r = 24 + (Math.random() - 0.5) * 8;
+
+    const x = -55 + r * Math.sin(phi) * Math.cos(theta);
+    const y = r * Math.sin(phi) * Math.sin(theta);
+    const z = r * Math.cos(phi);
+
+    coronaPos[i * 3] = x;
+    coronaPos[i * 3 + 1] = y;
+    coronaPos[i * 3 + 2] = z;
+
+    const chosenCol = Math.random() > 0.6 ? colGold : colTerracotta;
+    coronaColors[i * 3] = chosenCol.r;
+    coronaColors[i * 3 + 1] = chosenCol.g;
+    coronaColors[i * 3 + 2] = chosenCol.b;
+  }
+
+  coronaGeo.setAttribute('position', new THREE.BufferAttribute(coronaPos, 3));
+  coronaGeo.setAttribute('color', new THREE.BufferAttribute(coronaColors, 3));
+
+  const coronaMat = new THREE.PointsMaterial({
+    size: 2.8,
+    map: pTexture,
+    transparent: true,
+    opacity: 0.9,
+    vertexColors: true,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+
+  const coronaMesh = new THREE.Points(coronaGeo, coronaMat);
+  scene.add(coronaMesh);
+
+  // 3. Ambient Drifting Bokeh Cells (1,000 particles)
+  const dustCount = 800;
+  const dustGeo = new THREE.BufferGeometry();
+  const dustPos = new Float32Array(dustCount * 3);
+
+  for (let i = 0; i < dustCount * 3; i += 3) {
+    dustPos[i] = (Math.random() - 0.5) * 220;
+    dustPos[i + 1] = (Math.random() - 0.5) * 140;
+    dustPos[i + 2] = (Math.random() - 0.5) * 120;
+  }
+
+  dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+  const dustMat = new THREE.PointsMaterial({
+    size: 3.5,
+    map: pTexture,
+    color: 0xC99B76,
+    transparent: true,
+    opacity: 0.45,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+
+  const dustMesh = new THREE.Points(dustGeo, dustMat);
+  scene.add(dustMesh);
+
+  // Animation Loop
+  let clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const elapsedTime = clock.getElapsedTime();
+
+    // Rotate Helix along axis
+    helixMesh.rotation.x = elapsedTime * 0.35;
+    helixMesh.rotation.y = Math.sin(elapsedTime * 0.15) * 0.1;
+
+    // Pulse & swirl the biological corona orb
+    coronaMesh.rotation.y = elapsedTime * 0.4;
+    coronaMesh.rotation.z = elapsedTime * 0.25;
+
+    // Drift dust particles
+    dustMesh.rotation.y = elapsedTime * 0.04;
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  // Resize Handler
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+</script>
+
+</body>
+</html>
