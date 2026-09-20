@@ -1,11 +1,23 @@
-/* Fading portrait photo — blends into background, no hard border, face stays sharp */
+/* Fading portrait photo — blends directly into page background, no border */
+.about-portrait,
+.about-portrait img {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.about-portrait {
+  overflow: visible !important;
+}
+
 .about-portrait img {
   display: block;
   width: 100%;
   height: auto;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
+  object-fit: cover;
   -webkit-mask-image: radial-gradient(ellipse 62% 72% at 50% 38%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 96%);
   mask-image: radial-gradient(ellipse 62% 72% at 50% 38%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 96%);
   -webkit-mask-repeat: no-repeat;
